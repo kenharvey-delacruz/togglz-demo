@@ -80,6 +80,19 @@ public class BookingController {
         }
     }
 
+
+    @GetMapping("/show")
+    public ResponseEntity<?> getBookingsV3() {
+        if (featureManager.isActive(FeatureFlags.SPECIAL_BOOKINGS)) {
+            List<Booking> bookings = bookingRepository.findAll();
+            bookings.forEach(this::applySpecialOffers);
+            return ResponseEntity.ok(bookings);
+        } else {
+            List<Booking> bookings = bookingRepository.findAll();
+            return ResponseEntity.ok(bookings);
+        }
+    }
+
     private void applySpecialOffers(Booking booking) {
         // Apply special offers based on certain conditions
         // For example, apply a discount for bookings longer than a week

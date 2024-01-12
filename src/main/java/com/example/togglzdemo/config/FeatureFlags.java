@@ -24,6 +24,9 @@ public enum FeatureFlags implements Feature {
     API_VERSION_1,
 
     @Label("Enable API Version 2")
-    API_VERSION_2;
+    API_VERSION_2,
+
+    @Label("Enable Special Booking Discount")
+    SPECIAL_BOOKINGS;
 
 }
